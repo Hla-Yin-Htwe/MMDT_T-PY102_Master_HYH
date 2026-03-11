@@ -32,6 +32,18 @@ def is_balanced_parentheses(s: str) -> bool:
       is_balanced_parentheses("a+(b*c)-{d/e}") -> True
     """
     # TODO: implement using a stack
+    stack = []
+    pairs={')':'(',']':'[','}':'{'}
+
+    for char in s:
+        if char in pairs.values():
+            stack.append(char)
+        elif char in pairs.keys():
+            if not stack or stack[-1] != pairs[char]:
+                return False
+            stack.pop()
+    return len(stack) == 0
+
     raise NotImplementedError
 
 
@@ -45,6 +57,16 @@ def next_greater_to_right(nums: list[int]) -> list[int]:
       output -> [4, 2, 4, -1, -1]
     """
     # TODO: implement using a stack (monotonic stack)
+    stack = []
+    result = [-1] * len(nums)
+    for i in range(len(nums)-1, -1, -1):
+        while stack and stack[-1] <= nums[i]:
+            stack.pop()
+        if stack:
+            result[i] = stack[-1]
+        stack.append(nums[i])
+    return result
+
     raise NotImplementedError
 
 
@@ -70,7 +92,25 @@ def first_non_repeating(stream: str) -> str:
       Output: "a#bb"
     """
     # TODO: implement using a queue + counts
-    raise NotImplementedError
+
+    queue = deque()
+    counts = {}
+    result = []
+
+    for char in stream:
+        counts[char] = counts.get(char, 0) + 1
+        queue.append(char)
+
+        while queue and counts[queue[0]] > 1:
+            queue.popleft()
+
+        if queue:
+            result.append(queue[0])
+        else:
+            result.append('#')
+
+    return result
+
 
 
 def hot_potato(names: list[str], k: int) -> str:
@@ -105,4 +145,10 @@ def hot_potato(names: list[str], k: int) -> str:
 
     """
     # TODO: implement using a queue (deque)
-    raise NotImplementedError
+    queue = deque(names)
+
+    while len(queue) > 1:
+        for _ in range(k):
+            queue.append(queue.popleft())
+        queue.popleft()  # eliminate the player holding the potato
+    return queue[0]
