@@ -59,17 +59,7 @@ def reverseList(head):
     Time: O(n), Space: O(1)
     """
     # TODO: Implement
-    prev = None
-    curr = head
-
-    while curr:
-        next_node = curr.next
-        curr.next = prev        
-        prev = curr             
-        curr = next_node
-
-    return prev
-    # raise NotImplementedError
+    raise NotImplementedError
 
 def doubleIt(head):
     """
@@ -86,63 +76,7 @@ def doubleIt(head):
     - Use linked-list operations/pointer logic.
     - Avoid converting the entire list into an integer/string for the core solution.
     """
-    head = reverseList(head)
 
-    curr = head
-    carry = 0
-
-    # Step 2: Double each digit
-    while curr:
-        total = curr.val * 2 + carry
-        curr.val = total % 10
-        carry = total // 10
-
-        if curr.next is None:
-            if carry > 0:
-                curr.next = Node(carry)
-                carry = 0
-            break
-
-        curr = curr.next
-
-    # Step 3: Reverse back
-    head = reverseList(head)
-
-    return head
     # TODO: Implement
     raise NotImplementedError
-
-
-# num_list = SinglyLinkedList()
-# num_list.append(16)
-# num_list.insert(0,58)
-# num_list.printnodevalue()
-
-if __name__ == "__main__":
-
-    # Test reverseList
-    lst = SinglyLinkedList.from_list([1, 2, 3, 4, 5])
-    new_head = reverseList(lst.head)
-    reversed_list = SinglyLinkedList(new_head)
-
-    print("Reverse Test:")
-    print(reversed_list.to_list())   # Expected [5,4,3,2,1]
-
-
-    # Test doubleIt
-    lst2 = SinglyLinkedList.from_list([1, 8, 9])
-    new_head2 = doubleIt(lst2.head)
-    doubled_list = SinglyLinkedList(new_head2)
-
-    print("Double Test:")
-    print(doubled_list.to_list())   # Expected [3,7,8]
-
-
-    # Another test
-    lst3 = SinglyLinkedList.from_list([9, 9, 9])
-    new_head3 = doubleIt(lst3.head)
-    doubled_list2 = SinglyLinkedList(new_head3)
-
-    print("Double Test 2:")
-    print(doubled_list2.to_list())   # Expected [1,9,9,8]
 
