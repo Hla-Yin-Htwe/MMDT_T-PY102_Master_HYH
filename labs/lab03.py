@@ -30,7 +30,17 @@ def char_frequency(s: str) -> dict[str, int]:
       output = {'b': 1, 'a': 3, 'n': 2}
     """
     # TODO
-    raise NotImplementedError
+    # raise NotImplementedError
+    frequency={}
+
+    for char in s:
+      # print(char)
+      if char in frequency:
+        frequency[char] += 1
+      else:
+        frequency[char] = 1
+    return frequency
+# print(char_frequency("banana"))
 
 
 # -------------------------
