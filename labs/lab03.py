@@ -40,7 +40,7 @@ def char_frequency(s: str) -> dict[str, int]:
       else:
         frequency[char] = 1
     return frequency
-# print(char_frequency("banana"))
+print(char_frequency("banana"))
 
 
 # -------------------------
@@ -65,8 +65,12 @@ def insert_chaining(table: list[list[int]], key: int, size: int) -> list[list[in
       output = [[], [], [5]]
     """
     # TODO
-    raise NotImplementedError
-
+    # raise NotImplementedError
+    index = key % size
+    table[index].append(key)
+    return table
+table = [[], [], []]
+print(insert_chaining(table, 5, 3))
 
 # -------------------------
 # Q3 — Linear Probing
@@ -91,8 +95,18 @@ def insert_linear_probing(table: list[int | None], key: int) -> list[int | None]
 
       output = [8, 4, None, None]
     """
-    # TODO
-    raise NotImplementedError
+    size = len(table)
+    index = key % size
+
+    for i in range(size):
+        new_index = (index + i) % size
+        if table[new_index] is None:
+            table[new_index] = key
+            return table
+
+    return table
+table = [None, 4, None, None]
+print(insert_linear_probing(table, 8))
 
 
 # -------------------------
@@ -121,4 +135,16 @@ def insert_quadratic_probing(table: list[int | None], key: int) -> list[int | No
       output = [None, 7, None, 11]
     """
     # TODO
-    raise NotImplementedError
+    # raise NotImplementedError
+    size = len(table)
+    index = key % size
+
+    for i in range(size):
+        new_index = (index + i * i) % size
+        if table[new_index] is None:
+            table[new_index] = key
+            return table
+
+    return table  
+table = [None, 7, None, None]
+print(insert_quadratic_probing(table, 11))
